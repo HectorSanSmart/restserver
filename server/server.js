@@ -4,7 +4,8 @@ const express = require('express');
 const app = express();
 
 require('./config/config');
-app.use(require('./routes/usuario')); //importando y usando las rutas del usuario
+app.use(require('./routes/index')); //configuracion de la rutas
+
 
 //la forma en que se envian parametros
 // parse application/x-www-form-urlencoded
@@ -13,9 +14,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
-
-
-
 
 
 //conectandome a la base de datos de mongodb

@@ -4,6 +4,15 @@
 
 process.env.PORT = process.env.PORT || 3000;
 
+//==========================
+//Seed token
+//==========================
+//vencimieno del token
+
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+//SEED O SEMILLA
+process.env.SEED = process.env.SEDD || 'seed-desarrollo';
+
 
 //==========================
 //Entorno

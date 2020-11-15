@@ -49,6 +49,7 @@ let usuarioSchema = new Schema({
         default: false
     }
 });
+//excluyendo la contraseña en el json que se le envia al usuario
 //para que no se envie la contraseña en la respuetas
 usuarioSchema.methods.toJSON = function() {
     let user = this;

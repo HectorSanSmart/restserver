@@ -3,6 +3,8 @@ const app = express();
 const Usuario = require('../models/usuario');
 const bodyParser = require('body-parser');
 
+//para el token
+const { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacion');
 //para trabajar objetcos
 const _ = require('underscore');
 //encriptar la contraseña
@@ -18,8 +20,15 @@ app.use(bodyParser.json())
 
 //============================================================
 //Peticion que trae los usuario activos
-app.get('/usuario', function(req, res) {
-    //en req.query vienen los parametros opcionales
+//un midleware
+app.get('/usuario', verificaToken, (req, res) => {
+
+
+    return res.json({
+            //el req.usuario lo definimos en el archivo de aunteticacion en la parte de verificaToken
+            usuario: req.usuario
+        })
+        //en req.query vienen los parametros opcionales
     let desde = req.query.desde || 0;
     let limite = req.query.limite || 5;
     desde = Number(desde);
@@ -54,7 +63,7 @@ app.get('/usuario', function(req, res) {
 
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaAdmin_Role], function(req, res) {
     //extranedo lo que viene en el post o peticion
     let body = req.body; //el body viene del body parser
     //pasando los parametro a guardar
@@ -97,7 +106,7 @@ app.post('/usuario', function(req, res) {
 });
 
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
     //obteninedo el usuario, el :/id hace referencia al id que se envia
     //en esta caso el path es localhost:3000/usuario/:id
     let codigo = req.params.id; //obteniendo el id enviado 
@@ -124,7 +133,7 @@ app.put('/usuario/:id', function(req, res) {
 });
 
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
 
     let id = req.params.id;
     //borrando el usuario fisicamente
@@ -151,6 +160,8 @@ app.delete('/usuario/:id', function(req, res) {
             usuario: usuarioBorrado
         })
     })*/
+
+    //cambiando el estado del usaurio 
     let cambiaEstado = {
         estado: false
     }
