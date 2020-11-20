@@ -4,10 +4,11 @@
 
 process.env.PORT = process.env.PORT || 3000;
 
-//==========================
-//Seed token
-//==========================
-//vencimieno del token
+process.env.PORT
+    //==========================
+    //Seed token
+    //==========================
+    //vencimieno del token
 
 process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
 //SEED O SEMILLA
@@ -33,3 +34,10 @@ if (process.env.NODE_ENV === 'dev') {
 
 
 process.env.URLDB = urlDB;
+
+//==========================
+//GOOGLE CLIENT IN  
+//==========================
+
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '956082962797-7esqp1112vaqdv8rqb85drhvl879pae4.apps.googleusercontent.com';

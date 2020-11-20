@@ -3,9 +3,14 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 
-require('./config/config');
-app.use(require('./routes/index')); //configuracion de la rutas
+const path = require('path'); //libreria para trabajar los paths
 
+require('./config/config');
+app.use(require('./routes/index')); //configuracion  global de la rutas
+
+//habilitar la carpeta public para que sea acceddida
+app.use(express.static(path.resolve(__dirname, './public')));
+console.log(path.resolve(__dirname, '../public/'));
 
 //la forma en que se envian parametros
 // parse application/x-www-form-urlencoded
